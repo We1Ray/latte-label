@@ -1,0 +1,11 @@
+insert
+	into
+	lattek.label_data
+(data_id,
+	data_name,
+	data_path,
+	project_id)
+values(${data_id},
+${data_name},
+${data_path},
+${project_id});

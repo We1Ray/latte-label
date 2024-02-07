@@ -1,0 +1,13 @@
+insert
+	into
+	lattek.label_type
+(label_type_id,
+	label_type_name,
+	project_id,
+	update_user,
+	update_date)
+values(${label_type_id},
+${label_type_name},
+${project_id},
+${update_user},
+now());

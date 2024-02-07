@@ -1,0 +1,11 @@
+insert
+	into
+	lattek.label_group_enable_project
+(group_id,
+	project_id,
+	update_user,
+	update_date)
+values(${value},
+${project_id},
+${update_user},
+now())
