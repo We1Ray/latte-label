@@ -13,8 +13,6 @@ import {
   Alert,
   Spinner,
 } from "reactstrap";
-import ParticlesAuth from "../AuthenticationInner/ParticlesAuth";
-
 //redux
 import { useSelector, useDispatch } from "react-redux";
 
@@ -103,10 +101,9 @@ const Login = (props: any) => {
     }
   }, [dispatch, errorMsg]);
 
-  document.title = "Basic SignIn | Velzon - React Admin & Dashboard Template";
+  document.title = "Lattek Label Studio";
   return (
     <React.Fragment>
-      <ParticlesAuth>
         <div className="auth-page-content mt-lg-5">
           <Container>
             <Row>
@@ -231,7 +228,6 @@ const Login = (props: any) => {
             </Row>
           </Container>
         </div>
-      </ParticlesAuth>
     </React.Fragment>
   );
 };
