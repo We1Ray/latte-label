@@ -35,7 +35,7 @@ const LabelForm: React.FC<Props> = ({ project, backList }) => {
 
   function changeData() {
     CallApi.ExecuteApi(
-      "http://localhost:8080/label_project/get_project_label_data",
+      "/label_project/get_project_label_data",
       {
         project_id: project.project_id,
       }

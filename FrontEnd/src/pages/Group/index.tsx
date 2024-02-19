@@ -40,7 +40,7 @@ const Group = () => {
   useEffect(() => {
     if (reload) {
       CallApi.ExecuteApi(
-        "http://localhost:8080/label_project/get_account_label_group",
+        "/label_project/get_account_label_group",
         {
           account_uid: SystemFunc.getUser_Token(),
         }
@@ -60,7 +60,7 @@ const Group = () => {
 
   useEffect(() => {
     CallApi.ExecuteApi(
-      "http://localhost:8080/label_project/get_label_group_member",
+      "/label_project/get_label_group_member",
       {
         group_id: group.group_id,
       }
@@ -83,7 +83,7 @@ const Group = () => {
 
   const onUpsertGroup = (item: Group) => {
     CallApi.ExecuteApi(
-      "http://localhost:8080/label_project/upsert_label_group",
+      "/label_project/upsert_label_group",
       item
     )
       .then(async (res: any) => {

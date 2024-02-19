@@ -30,7 +30,8 @@ interface Project {
 
 const List = () => {
   const [project, setProject] = useState<Project>({});
-  const [projectLists, setProjectLists] = useState([]);
+  const [projectLists, setProjectLists] = useState<Project[]>([]);
+  const [projectListsType, setProjectListsType] = useState([]);
   const [clickProject, setClickProject] = useState<Project>({});
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpsertModal, setOpenUpsertModal] = useState<boolean>(false);
@@ -40,15 +41,32 @@ const List = () => {
 
   useEffect(() => {
     if (reload) {
-      CallApi.ExecuteApi(
-        "http://localhost:8080/label_project/get_account_available_label_project",
-        {
-          account_uid: SystemFunc.getUser_Token(),
-        }
-      )
-        .then((res: any) => {
+      CallApi.ExecuteApi("/label_project/get_account_available_label_project", {
+        account_uid: SystemFunc.getUser_Token(),
+      })
+        .then(async (res: any) => {
           if (res) {
             setProjectLists(res);
+            let val = [];
+            for (let index = 0; index < res.length; index++) {
+              const element = res[index];
+              await CallApi.ExecuteApi(
+                "/label_project/get_project_label_type",
+                {
+                  project_id: element.project_id,
+                }
+              )
+                .then((res: any) => {
+                  if (res) {
+                    val.push(res);
+                  }
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            }
+
+            setProjectListsType(val);
           }
         })
         .catch((error) => {
@@ -74,14 +92,11 @@ const List = () => {
   };
 
   const onUpsertProject = (item: Project, type: any, group: any) => {
-    CallApi.ExecuteApi(
-      "http://localhost:8080/label_project/upsert_label_project",
-      {
-        project: item,
-        type: type,
-        group: group,
-      }
-    )
+    CallApi.ExecuteApi("/label_project/upsert_label_project", {
+      project: item,
+      type: type,
+      group: group,
+    })
       .then(async (res: any) => {
         if (res) {
           setReload(true);
@@ -95,12 +110,9 @@ const List = () => {
   };
 
   const onDeleteProject = (item: Project) => {
-    CallApi.ExecuteApi(
-      "http://localhost:8080/label_project/delete_label_project",
-      {
-        project_id: item.project_id,
-      }
-    )
+    CallApi.ExecuteApi("/label_project/delete_label_project", {
+      project_id: item.project_id,
+    })
       .then(async (res: any) => {
         if (res) {
           setReload(true);
@@ -255,15 +267,26 @@ const List = () => {
                             <Col xs={6}>
                               <div>
                                 <p className="text-muted mb-1">Type</p>
-                                <div className="fs-12 badge bg-warning-subtle text-warning">
-                                  {item.describe}
-                                </div>
+                                {projectListsType[index] ? (
+                                  projectListsType[index].map(
+                                    (element: any) => (
+                                      <>
+                                        <div className="fs-12 badge text-warning">
+                                          {element.label_type_name}
+                                        </div>
+                                        <a> </a>
+                                      </>
+                                    )
+                                  )
+                                ) : (
+                                  <></>
+                                )}
                               </div>
                             </Col>
                             <Col xs={6}>
                               <div>
-                                <p className="text-muted mb-1">Create Date</p>
-                                <h5 className="fs-14">{item.update_date}</h5>
+                                <p className="text-muted mb-1">Describe</p>
+                                <h5 className="fs-14">{item.describe}</h5>
                               </div>
                             </Col>
                           </Row>

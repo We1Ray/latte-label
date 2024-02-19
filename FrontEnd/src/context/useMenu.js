@@ -78,7 +78,7 @@ export default function useMenu(backProject) {
     //         });
     //       }
     //       CallApi.ExecuteApi(
-    //         "http://localhost:8080/label_project/insert_label_data",
+    //         "/label_project/insert_label_data",
     //         insertData
     //       )
     //         .then((res) => {

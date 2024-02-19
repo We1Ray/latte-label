@@ -146,7 +146,7 @@ const DataTable: React.FC<DataTableProps> = ({
       let data_id = element.map((item) => item.data_id);
       let data_path = element.map((item) => item.data_path);
       await CallApi.ExecuteApi(
-        "http://localhost:8080/label_project/delete_label_project_data",
+        "/label_project/delete_label_project_data",
         { data_path: data_path, data_id: data_id }
       )
         .then(async (res: any) => {
@@ -200,7 +200,7 @@ const DataTable: React.FC<DataTableProps> = ({
       let insert_success = false;
       for (let index = 0; index < chunks.length; index++) {
         await CallApi.ExecuteApi(
-          "http://localhost:8080/label_project/insert_label_data",
+          "/label_project/insert_label_data",
           chunks[index]
         )
           .then((res) => {

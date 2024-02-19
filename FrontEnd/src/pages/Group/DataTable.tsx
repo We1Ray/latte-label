@@ -118,7 +118,7 @@ const DataTable: React.FC<DataTableProps> = ({
   useEffect(() => {
     if (reload) {
       CallApi.ExecuteApi(
-        "http://localhost:8080/label_project/get_label_group_member",
+        "/label_project/get_label_group_member",
         {
           group_id: group.group_id,
         }
@@ -195,7 +195,7 @@ const DataTable: React.FC<DataTableProps> = ({
 
   function delete_data() {
     CallApi.ExecuteApi(
-      "http://localhost:8080/label_project/delete_label_group_member",
+      "/label_project/delete_label_group_member",
       selectedData.filter(
         (val) => val.account_uid !== SystemFunc.getUser_Token()
       )
@@ -215,7 +215,7 @@ const DataTable: React.FC<DataTableProps> = ({
   function add(selectMembers: any) {
     console.log(selectMembers);
     CallApi.ExecuteApi(
-      "http://localhost:8080/label_project/insert_label_group_member",
+      "/label_project/insert_label_group_member",
       selectMembers
     )
       .then(async (res: any) => {
@@ -323,7 +323,7 @@ function AddModal({ group, show, onActionClick, onCloseClick }) {
   useEffect(() => {
     if (show) {
       CallApi.ExecuteApi(
-        "http://localhost:8080/label_project/get_member_not_in_group",
+        "/label_project/get_member_not_in_group",
         {
           group_id: group.group_id,
           update_user: SystemFunc.getUser_Token(),

@@ -121,13 +121,13 @@ function SaveModal() {
     );
 
     CallApi.ExecuteApi(
-      "http://localhost:8080/label_project/delete_label_data_yolo",
+      "/label_project/delete_label_data_yolo",
       data_id
     )
       .then((res) => {
         if (res) {
           CallApi.ExecuteApi(
-            "http://localhost:8080/label_project/insert_label_data_yolo",
+            "/label_project/insert_label_data_yolo",
             labels
           )
             .then((res) => {

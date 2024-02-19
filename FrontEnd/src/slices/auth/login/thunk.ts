@@ -1,10 +1,3 @@
-//Include Both Helper File with needed methods
-import { getFirebaseBackend } from "../../../helpers/firebase_helper";
-import {
-  postFakeLogin,
-  postJwtLogin,
-} from "../../../helpers/fakebackend_helper";
-
 import {
   loginSuccess,
   logoutUserSuccess,
@@ -53,7 +46,7 @@ export const loginUser = (user: any, history: any) => async (dispatch: any) => {
     // }
 
     if (user) {
-      CallApi.ExecuteApi("http://localhost:8080/public/login", {
+      CallApi.ExecuteApi("/public/login", {
         email: user.email,
         password: user.password,
       })
@@ -79,13 +72,8 @@ export const loginUser = (user: any, history: any) => async (dispatch: any) => {
 export const logoutUser = () => async (dispatch: any) => {
   try {
     sessionStorage.removeItem("authUser");
-    let fireBaseBackend: any = getFirebaseBackend();
-    if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-      const response = fireBaseBackend.logout;
-      dispatch(logoutUserSuccess(response));
-    } else {
-      dispatch(logoutUserSuccess(true));
-    }
+
+    dispatch(logoutUserSuccess(true));
   } catch (error) {
     dispatch(apiError(error));
   }
@@ -95,14 +83,6 @@ export const socialLogin =
   (type: any, history: any) => async (dispatch: any) => {
     try {
       let response;
-
-      if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-        const fireBaseBackend: any = getFirebaseBackend();
-        response = fireBaseBackend.socialLoginUser(type);
-      }
-      //  else {
-      //   response = postSocialLogin(data);
-      // }
 
       const socialdata = await response;
       if (socialdata) {

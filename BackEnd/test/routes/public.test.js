@@ -29,11 +29,11 @@ describe("Login", () => {
   it("Login Test", (done) => {
     request(app)
       .post("/public/get_account") // 登入測試
-      .set("factory", "DS") // 增加另一個自定義標頭
+      .set("factory", "") // 增加另一個自定義標頭
       .set("Accept", "application/json")
       .send({
-        account: "POLORY.CHENG",
-        email: "polory.cheng@deanshoes.com",
+        account: "",
+        email: "",
         password: "0000",
       })
       .expect(200)
@@ -45,7 +45,7 @@ describe("Login", () => {
           expect(res.body[0]["account_uid"]).to.equal(
             "ffa88e6b-6aed-4725-bbeb-c9a84b61fed3"
           );
-          expect(res.body[0]["account"]).to.equal('POLORY.CHENG');
+          expect(res.body[0]["account"]).to.equal("POLORY.CHENG");
           expect(res.body[0]["name"]).to.be.a("string");
           expect(res.body[0]["email"]).to.be.a("string");
           expect(res.body[0]["locked"]).to.be.a("string");

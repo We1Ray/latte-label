@@ -38,7 +38,7 @@ function DashboardInit({ project_id, backProject, images, data_id }) {
     let databox = [];
 
     CallApi.ExecuteApi(
-      "http://localhost:8080/label_project/get_project_label_data_yolo",
+      "/label_project/get_project_label_data_yolo",
       {
         project_id: project_id,
       }

@@ -45,7 +45,7 @@ const UpsertLabelProjectModal: React.FC<UpsertLabelProjectModalProps> = ({
   useEffect(() => {
     if (show) {
       CallApi.ExecuteApi(
-        "http://localhost:8080/label_project/get_label_project_account_group",
+        "/label_project/get_label_project_account_group",
         {
           project_id: project_id,
           account_uid: SystemFunc.getUser_Token(),
@@ -64,7 +64,7 @@ const UpsertLabelProjectModal: React.FC<UpsertLabelProjectModalProps> = ({
         setDescribe(project.describe);
 
         CallApi.ExecuteApi(
-          "http://localhost:8080/label_project/get_lable_project_group",
+          "/label_project/get_lable_project_group",
           {
             project_id: project_id,
             update_user: SystemFunc.getUser_Token(),
@@ -80,7 +80,7 @@ const UpsertLabelProjectModal: React.FC<UpsertLabelProjectModalProps> = ({
           });
 
         CallApi.ExecuteApi(
-          "http://localhost:8080/label_project/get_project_label_type",
+          "/label_project/get_project_label_type",
           {
             project_id: project_id,
           }

@@ -20,12 +20,9 @@ export default function Right() {
   const [typeOptions, setTypeOptions] = useState([]);
 
   useEffect(() => {
-    CallApi.ExecuteApi(
-      "http://localhost:8080/label_project/get_project_label_type",
-      {
-        project_id: state.project_id,
-      }
-    )
+    CallApi.ExecuteApi("/label_project/get_project_label_type", {
+      project_id: state.project_id,
+    })
       .then((res) => {
         if (res) {
           setType(res);
@@ -116,6 +113,7 @@ export default function Right() {
                           ? typeOptions[0]
                           : {};
                       }}
+                      menuPosition="fixed"
                     />
                   </Col>
                 );

@@ -2,9 +2,6 @@ import axios from "axios";
 import moment from "moment";
 import { DependencyList } from "react";
 
-const CENTER_IP = "http://localhost:8080";
-const CENTER_FACTORY = "";
-
 export default new (class PublicMethod {
   /**
    * 確認目前值是否存在或為空 不為空(有值)為true，空值(undefined)為false
@@ -199,5 +196,4 @@ interface hooks {
   deps?: DependencyList;
 }
 
-export { CENTER_IP, CENTER_FACTORY };
 export type { hooks };
